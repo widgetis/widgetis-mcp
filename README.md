@@ -26,8 +26,21 @@
 ## Як підключити
 
 1. Зареєструйтесь на [widgetis.com](https://widgetis.com/?utm_source=github&utm_medium=referral&utm_campaign=mcp-repo) і додайте свій магазин на Хорошоп.
-2. У кабінеті відкрийте сторінку віджетів, картка **«Ключ для AI-агента»**, кнопка **«Створити ключ»**. Ключ починається з `wgt_site_` і діє до 90 днів. Ключ доступний на всіх тарифах, і на безкоштовному Free теж.
-3. Додайте сервер у свій клієнт.
+2. У кабінеті відкрийте сторінку віджетів, картка **«Ключ для AI-агента»**, кнопка **«Створити ключ»**. Ключ доступний на всіх тарифах, і на безкоштовному Free теж.
+
+   ![Картка «Ключ для AI-агента» в кабінеті Widgetis з кнопкою «Створити ключ»](docs/images/agent-key-create.png)
+
+3. Скопіюйте ключ одразу: кабінет показує його один раз. Ключ починається з `wgt_site_` і діє 90 днів. Поруч готові команда для Claude Code і налаштування для Cursor, кнопка «Скопіювати» бере їх разом із ключем.
+
+   ![Створений ключ: команда для Claude Code і налаштування для Cursor](docs/images/agent-key-issued.png)
+
+   <details><summary>Те саме на телефоні</summary>
+
+   <img src="docs/images/agent-key-phone.png" alt="Картка ключа в кабінеті Widgetis на телефоні" width="320">
+
+   </details>
+
+4. Додайте сервер у свій клієнт.
 
 **Claude Code**
 
@@ -95,14 +108,18 @@ claude mcp add --scope user --transport http widgetis https://agents.widgetis.co
 
 The server is hosted at `https://agents.widgetis.com/mcp` (streamable HTTP). It exposes seven tools: `get_my_site`, `describe_widget`, `get_widget`, `enable_widget`, `disable_widget`, `update_widget_config`, `set_widget_translations`. Every write is validated against the widget's JSON Schema before it is saved.
 
-**Connect:** create a key in the Widgetis cabinet (widgets page, card «Ключ для AI-агента», every plan including Free), then:
+**Connect:** create a key in the Widgetis cabinet (widgets page, card «Ключ для AI-агента», button «Створити ключ», every plan including Free). The key is shown once, next to a ready command for Claude Code and a config for Cursor:
+
+![The issued key with the Claude Code command and the Cursor config](docs/images/agent-key-issued.png)
+
+Then:
 
 ```bash
 claude mcp add --scope user --transport http widgetis https://agents.widgetis.com/mcp \
   --header "Authorization: Bearer wgt_site_YOUR_KEY"
 ```
 
-A key works for one store only, within its plan, and can be revoked at any time. The server keeps no credentials.
+A key works for one store only and changes any setting or text of that store's widgets on every plan, Free included; the plan sets how many widgets are on at once. It can be revoked at any time. The server keeps no credentials.
 
 The cabinet, the widgets and the support are in Ukrainian. Questions: hello@widgetis.com or [Telegram @widgetis](https://t.me/widgetis).
 
